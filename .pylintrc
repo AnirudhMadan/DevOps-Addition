@@ -1,0 +1,51 @@
+[MASTER]
+# List of files and directories to be ignored
+ignore = venv, __pycache__, .git, .github
+
+# Set the maximum number of characters on a single line.
+max-line-length = 88
+
+# Specify the Python version to be checked
+py-version = 3.11
+
+# Disable specific warnings and informational messages
+disable = 
+    C0114,  # Missing module docstring
+    C0115,  # Missing class docstring
+    C0116,  # Missing function or method docstring
+    R0903,  # Too few public methods in class
+
+[MESSAGES CONTROL]
+# Enable specific Pylint checks
+enable = 
+    C0103,  # Variable name doesn't conform to snake_case
+    W0611,  # Unused import
+
+[FORMAT]
+# Indentation settings
+indent-string = "    "
+indent-after-paren = 4
+
+# Expected docstring style: reStructuredText or Google
+docstring-convention = google
+
+[REPORTS]
+# Report format
+reports = no
+
+[LOGGING]
+# Specify the logging modules to be checked
+logging-modules = logging
+
+[TYPECHECK]
+# Generate type hints for better checking
+ignored-modules = flask
+
+[DESIGN]
+# Maximum number of arguments for a function/method
+max-args = 5
+
+[IMPORTS]
+# Allow relative imports
+allow-relative-imports = yes
+
