@@ -6,6 +6,10 @@ def add(a, b):
     """Function to add two numbers."""
     return a + b
 
+@app.route('/')
+def home():
+    return "Addition App is running! Use /add?num1=number&num2=number to add two numbers."
+
 @app.route('/add', methods=['GET'])
 def add_numbers():
     """Endpoint to add numbers via HTTP request."""

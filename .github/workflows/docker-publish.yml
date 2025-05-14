@@ -9,36 +9,59 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Checkout code
       - name: Checkout code
         uses: actions/checkout@v3
 
+      # Set up Python
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: "3.11"
 
+      # Install Dependencies
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      # Run PyUnit Tests
       - name: Run PyUnit Tests
         run: |
           python -m unittest discover -s . -p "test_*.py"
 
+      # Run Pylint
       - name: Run Pylint
         run: |
           pylint addition.py test_addition.py
 
+  docker:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      # Checkout code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Set up Docker Buildx
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
+      # Login to Docker Hub
       - name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      # Set Docker Metadata (Optional, adds commit SHA tag)
+      - name: Extract Metadata for Docker
+        uses: docker/metadata-action@v4
+        with:
+          images: yourusername/addition-app
+
+      # Build and Push Docker Image
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v4
         with:
