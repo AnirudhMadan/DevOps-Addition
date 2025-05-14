@@ -8,6 +8,7 @@ def add(a, b):
 
 @app.route('/')
 def home():
+    """Home page route."""
     return "Addition App is running! Use /add?num1=number&num2=number to add two numbers."
 
 @app.route('/add', methods=['GET'])
@@ -20,6 +21,7 @@ def add_numbers():
         return jsonify({"result": result})
     except (ValueError, TypeError):
         return jsonify({"error": "Invalid input. Provide integers only."}), 400
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8080)
